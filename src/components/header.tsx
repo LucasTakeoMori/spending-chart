@@ -19,7 +19,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import { cn } from '@/lib/utils'
 
-export default function Header({ year }: { year: number }) {
+type HeaderPrpos = {
+  year: number
+}
+
+export default function Header({ year }: HeaderPrpos) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const selectedExpenseType = searchParams.get('type') || 'uf'

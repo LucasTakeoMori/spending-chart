@@ -3,12 +3,14 @@ import PartyChart from '@/components/party-chart'
 import UFChart from '@/components/uf-chart'
 
 type HomeProps = {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function Home({ searchParams }: HomeProps) {
-  const expensesType = searchParams.type || 'uf'
-  const year = searchParams.year || 2024
+  const resolvedSearchParams = await searchParams;
+
+  const expensesType = resolvedSearchParams.type || 'uf';
+  const year = resolvedSearchParams.year || 2024;
 
   const ufResponse = await fetch(
     `https://apis.codante.io/senator-expenses/summary/by-uf`,
